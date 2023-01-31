@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Link, NavLink} from "react-router-dom";
 
 function CollapsibleExample() {
     return (
@@ -12,7 +13,9 @@ function CollapsibleExample() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <NavDropdown title="My Account" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+                            <NavDropdown.Item href="/profile">
+                                Profile
+                            </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Photos
                             </NavDropdown.Item>
@@ -22,7 +25,9 @@ function CollapsibleExample() {
                                 Separated link
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#features">Messages</Nav.Link>
+                        <Nav.Link href="/messages">
+                            Messages
+                        </Nav.Link>
                         <Nav.Link href="#pricing">Also smth</Nav.Link>
                     </Nav>
                     <Nav>

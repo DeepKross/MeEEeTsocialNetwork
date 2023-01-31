@@ -1,7 +1,7 @@
 import css from "../MyProfile.module.css"
 
-function Right(){
-    return(
+function Right() {
+    return (
         <div className={css.right}>
             <div className={css.posts}>
                 Posts
