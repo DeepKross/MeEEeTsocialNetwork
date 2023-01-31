@@ -1,17 +1,18 @@
 import css from "../MyProfile.module.css"
+import MyPosts from "./MyPosts/MyPosts";
 
 function Right() {
+
+    let posts =
+        [
+            {id: 1, text: "Hello there!"},
+            {id: 2, text: "Heu, How are you guys!"},
+            {id: 3, text: "today I was on the trip to London and had a great time"}
+        ];
+
     return (
         <div className={css.right}>
-            <div className={css.posts}>
-                Posts
-                <div>
-                    New Post
-                    <div>My Post</div>
-                    <div>My Post</div>
-                    <div>My Post</div>
-                </div>
-            </div>
+            <MyPosts posts={posts}/>
         </div>
     );
 }
