@@ -4,13 +4,12 @@ import DialogItem from "./DialogItem/DialogItem";
 
 function Dialogs(props) {
 
-    let contacts = props.contacts
+    let contacts = props.messagesPage.contacts
         .map(e => <DialogItem id={e.id} name={e.name}/>);
 
     return (
-
         <div className={css.dialogs}>
-            Dialogs
+            <div className={css.header}>Dialogs</div>
             {contacts}
         </div>
 

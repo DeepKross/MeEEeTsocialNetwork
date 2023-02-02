@@ -1,4 +1,25 @@
-.messages{
+.messagesPage{
     display: grid;
     grid-template-columns: 3fr 10fr;
+}
+
+.dialogs{
+    margin: 20px;
+    border-right:  3px solid cadetblue;
+}
+
+.messages{
+    margin: 20px;
+}
+
+.new_message{
+
+}
+
+.new_text{
+
+}
+
+.sender{
+
 }

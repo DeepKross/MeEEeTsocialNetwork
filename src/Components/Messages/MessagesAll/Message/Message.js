@@ -1,9 +1,9 @@
 import css from "./Message.module.css"
 
-function Message() {
+function Message(props) {
     return (
         <div>
-            Message
+            {props.text}
         </div>
     );
 }

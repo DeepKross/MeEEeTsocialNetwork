@@ -3,18 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./Components/NavBar";
 import MyProfile from './Components/Profile/MyProfile'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Messages from "./Components/Messages/Messages";
+import MessagesPage from "./Components/Messages/MessagesPage";
 
 
-function App() {
+function App(props) {
     return (
         <BrowserRouter>
             <div className="App">
                 <NavBar/>
                 <div className="mainContent">
                     <Routes>
-                        <Route path="/profile" element={<MyProfile/>}></Route>
-                        <Route path="/messages" element={<Messages/>}></Route>
+                        <Route path="/profile"
+                               element={<MyProfile dispatch={props.dispatch}
+                                                   postsPage={props.state.myProfilePage}/>}></Route>
+                        <Route path="/messages/*"
+                               element={<MessagesPage messagesPage={props.state.messagesPage}
+                                                      dispatch={props.dispatch}/>}></Route>
                     </Routes>
                 </div>
             </div>
