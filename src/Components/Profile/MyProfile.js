@@ -3,10 +3,11 @@ import MyProfileLeft from "./Left/MyProfileLeft";
 import MyProfileRight from "./Right/MyProfileRight";
 
 function MyProfile(props) {
+    //console.log(props.store.getState().)
     return (
         <div className={css.profile}>
             <MyProfileLeft/>
-            <MyProfileRight posts={props.postsPage} dispatch={props.dispatch}/>
+            <MyProfileRight store={props.store}/>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import css from "../MyProfile.module.css"
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 function Right(props) {
     return (
         <div className={css.right}>
-            <MyPosts posts={props.posts} dispatch={props.dispatch}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     );
 }

@@ -1,28 +1,27 @@
 import css from './MyPosts.module.css'
-import Post from "./Post/Post";
 import React from "react";
-import {addPostActionCreator, changeTextActionCreator} from "../../../../redux/state";
+import Post from "./Post/Post";
 
 
 function MyPosts(props) {
 
-    let my_posts = props.posts.posts
+    let my_posts = props.posts
         .map(e => <Post text={e.text}/>);
 
     let addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     }
 
     let updateTextArea = (e) => {
-        let toUpdt = e.target.value;
-        props.dispatch(changeTextActionCreator(toUpdt));
+        let text = e.target.value;
+        props.updateTextArea(text);
     }
 
 
     return (
         <div className={css.myPosts}>
             <div>
-                <textarea onChange={updateTextArea} value={props.posts.currentText}></textarea>
+                <textarea onChange={updateTextArea} value={props.currentText}></textarea>
                 <button onClick={addPost}> New Post </button>
             </div>
             <div>
