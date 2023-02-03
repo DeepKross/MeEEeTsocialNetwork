@@ -7,10 +7,10 @@ function MessagesPage(props) {
         <div className={css.messagesPage}>
             <div className={css.dialogs}>
                 Here are list of dialogs
-                <DialogsContainer store={props.store}/>
+                <DialogsContainer/>
             </div>
             <div className={css.messages}>
-                <MessagesAllContainer store={props.store}/>
+                <MessagesAllContainer/>
             </div>
 
         </div>

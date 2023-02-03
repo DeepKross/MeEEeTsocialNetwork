@@ -7,7 +7,7 @@ function MyProfile(props) {
     return (
         <div className={css.profile}>
             <MyProfileLeft/>
-            <MyProfileRight store={props.store}/>
+            <MyProfileRight />
         </div>
     );
 }

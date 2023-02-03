@@ -14,9 +14,9 @@ function App(props) {
                 <div className="mainContent">
                     <Routes>
                         <Route path="/profile"
-                               element={<MyProfile store={props.store}/>}></Route>
+                               element={<MyProfile/>}></Route>
                         <Route path="/messages/*"
-                               element={<MessagesPage store={props.store}/>}></Route>
+                               element={<MessagesPage/>}></Route>
                     </Routes>
                 </div>
             </div>

@@ -1,23 +1,29 @@
 import React from "react";
 import MyPosts from "./MyPosts";
 import {addPostActionCreator, changeTextActionCreator} from "../../../../redux/state";
+import StoreContext from "../../../../StoreContext";
 
-
-function MyPostsContainer(props) {
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreator());
-    }
-
-    let updateTextArea = (text) => {
-        props.store.dispatch(changeTextActionCreator(text));
-    }
-
-
+function MyPostsContainer() {
     return (
-        <MyPosts updateTextArea={updateTextArea}
-        addPost={addPost}
-        currentText={props.store.getState().myProfilePage.currentText}
-        posts={props.store.getState().myProfilePage.posts}/>
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    let addPost = () => {
+                        store.dispatch(addPostActionCreator());
+                    }
+
+                    let updateTextArea = (text) => {
+                        store.dispatch(changeTextActionCreator(text));
+                    }
+
+
+                    return <MyPosts updateTextArea={updateTextArea}
+                             addPost={addPost}
+                             currentText={store.getState().myProfilePage.currentText}
+                             posts={store.getState().myProfilePage.posts}/>;
+                }
+            }
+        </StoreContext.Consumer>
     );
 }
 

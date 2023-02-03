@@ -5,19 +5,22 @@ import store from "./redux/redux-store";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import StoreContext from "./StoreContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let rerenderDOM = () => {
     root.render(
         <React.StrictMode>
-            <App store={store}/>
+            <StoreContext.Provider value={store}>
+                <App/>
+            </StoreContext.Provider>
         </React.StrictMode>
     );
 }
 
 rerenderDOM();
 
-store.subscribe( () => {
+store.subscribe(() => {
     rerenderDOM(store.getState());
 });
 
