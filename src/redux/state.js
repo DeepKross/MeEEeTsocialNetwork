@@ -1,3 +1,5 @@
+import ProfilePageReducer from "./ProfilePageReducer";
+import MessagePageReducer from "./MessagePageReducer";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
@@ -74,37 +76,12 @@ let store = {
     },
 
     dispatch(action){  // {type: text}
-        switch (action.type){
-            case ADD_POST:
-                let new_Post =
-                    {
-                        id: this.state.myProfilePage.posts.length,
-                        text: this.state.myProfilePage.currentText
-                    };
-                this.state.myProfilePage.posts.push(new_Post);
-                this.state.myProfilePage.currentText = '';
-                this.callSubscriber(this.state);
-                break;
-            case CHANGE_TEXT:
-                this.state.myProfilePage.currentText = action.text;
-                this.callSubscriber(this.state);
-                break;
-            case  SEND_MESSAGE:
-                let new_Message =
-                    {
-                        id: this.state.messagesPage.dialogs.length,
-                        message: this.state.messagesPage.currentMessage
-                    };
-                this.state.messagesPage.dialogs.push(new_Message);
-                this.state.messagesPage.currentMessage = '';
-                this.callSubscriber(this.state);
-                break;
-            case CHANGE_MESSAGE:
-                this.state.messagesPage.currentMessage = action.text;
-                this.callSubscriber(this.state);
-                break;
-            default: console.log("Unknown command")
-        }
+
+        this.state.myProfilePage = ProfilePageReducer(this.state.myProfilePage, action);
+        this.state.messagesPage = MessagePageReducer(this.state.messagesPage, action);
+
+        this.callSubscriber(this.state);
+
     }
 }
 
