@@ -4,7 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 
 function Dialogs(props) {
 
-    let contacts = props.messagesPage.contacts
+    let contacts = props.contacts
         .map(e => <DialogItem id={e.id} name={e.name}/>);
 
     return (

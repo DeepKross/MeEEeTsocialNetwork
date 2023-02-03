@@ -1,26 +1,27 @@
 import css from "./Messages.module.css"
 import Message from "./Message/Message";
-import {changeMessageActionCreator, sendMessageActionCreator} from "../../../redux/state";
 
-function MessagesAll(props){
+function MessagesAll(props) {
 
-    let myMessages = props.messagesPage.dialogs.map(e => <Message text={e.message}></Message>);
+    let myMessages = props.dialogs
+        .map(e => <Message text={e.message}/>);
 
     let changeText = (e) => {
         let text = e.target.value;
-        props.dispatch(changeMessageActionCreator(text));
+        props.changeText(text);
     }
 
     let sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage();
     }
 
-    return(
+    return (
         <div>
             Messages
-            <Message/>
+
             <div className={css.new_message}>
-                <textarea onChange={changeText} value={props.messagesPage.currentText} className={css.new_text}></textarea>
+                <textarea onChange={changeText} value={props.currentText}
+                          className={css.new_text}></textarea>
                 <button onClick={sendMessage} className={css.sender}>
                     Send
                 </button>
