@@ -34,4 +34,19 @@ let MessagePageReducer = (state = initialState, action) => {
     return state;
 }
 
+export let changeMessageActionCreator = (text) => {
+    return(
+        {
+            type: CHANGE_MESSAGE,
+            text: text
+        }
+    );
+}
+
+export let sendMessageActionCreator = () => {
+    return(
+        {type: SEND_MESSAGE}
+    );
+}
+
 export default MessagePageReducer;

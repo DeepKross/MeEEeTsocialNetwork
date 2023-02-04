@@ -2,7 +2,7 @@ import css from './Messages.module.css'
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import MessagesAllContainer from "./MessagesAll/MessagesAllContainer";
 
-function MessagesPage(props) {
+function MessagesPage() {
     return (
         <div className={css.messagesPage}>
             <div className={css.dialogs}>

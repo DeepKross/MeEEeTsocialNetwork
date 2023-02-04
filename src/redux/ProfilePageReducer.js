@@ -29,4 +29,21 @@ let ProfilePageReducer = (state = initialState, action) => {
     return state;
 }
 
+export let addPostActionCreator = () => {
+    return (
+        {
+            type: ADD_POST
+        }
+    );
+};
+
+export let changeTextActionCreator = (text) => {
+    return(
+        {
+            type: CHANGE_TEXT,
+            text: text
+        }
+    );
+};
+
 export default ProfilePageReducer;

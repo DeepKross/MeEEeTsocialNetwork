@@ -18,7 +18,6 @@ function MessagesAll(props) {
     return (
         <div>
             Messages
-
             <div className={css.new_message}>
                 <textarea onChange={changeText} value={props.currentText}
                           className={css.new_text}></textarea>

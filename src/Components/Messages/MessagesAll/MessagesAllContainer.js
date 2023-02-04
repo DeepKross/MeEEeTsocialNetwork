@@ -1,31 +1,29 @@
-import {changeMessageActionCreator, sendMessageActionCreator} from "../../../redux/state";
+import {changeMessageActionCreator, sendMessageActionCreator} from "../../../redux/MessagePageReducer";
 import MessagesAll from "./MessagesAll";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
-function MessagesAllContainer(props){
+let mapStateToProps = (state) => {
     return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let changeText = (text) => {
-                        store.dispatch(changeMessageActionCreator(text));
-                    }
-
-                    let sendMessage = () => {
-                        store.dispatch(sendMessageActionCreator())
-                    }
-                    return(
-                        <MessagesAll
-                            dialogs={store.getState().messagesPage.dialogs}
-                            sendMessage={sendMessage}
-                            changeText={changeText}
-                            currentText={store.getState().messagesPage.currentMessage}
-                        />
-                    );
-                }
-            }
-        </StoreContext.Consumer>
+        {
+            dialogs: state.messagesPage.dialogs,
+            currentText: state.messagesPage.currentMessage
+        }
     );
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return (
+        {
+            sendMessage: () => {
+                dispatch(sendMessageActionCreator());
+            },
+            changeText: (text) => {
+                dispatch(changeMessageActionCreator(text));
+            }
+        }
+    );
+}
+
+const MessagesAllContainer = connect(mapStateToProps, mapDispatchToProps)(MessagesAll)
 
 export default MessagesAllContainer;
