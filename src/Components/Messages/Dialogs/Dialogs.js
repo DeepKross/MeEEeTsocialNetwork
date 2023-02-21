@@ -3,7 +3,7 @@ import DialogItem from "./DialogItem/DialogItem";
 
 
 function Dialogs(props) {
-
+    console.log(props.contacts);
     let contacts = props.contacts
         .map(e => <DialogItem id={e.id} name={e.name}/>);
 

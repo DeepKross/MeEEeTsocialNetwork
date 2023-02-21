@@ -13,20 +13,21 @@ let initialState =  {
 let ProfilePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
-            let new_Post =
-                {
-                    id: state.posts.length,
-                    text: state.currentText
-                };
-            state.posts.push(new_Post);
-            state.currentText = '';
+            let newPost = state.currentText;
+            return {
+                ...state,
+                currentText: '',
+                posts: [...state.posts, {id: state.posts.length, text: newPost}]
+            };
             break;
         case CHANGE_TEXT:
-            state.currentText = action.text;
+            return {
+                ...state,
+                currentText: action.text
+            }
             break;
-        default: console.log("Unknown command")
+        default: return state;
     }
-    return state;
 }
 
 export let addPostActionCreator = () => {

@@ -28,7 +28,9 @@ function CollapsibleExample() {
                         <Nav.Link href="/messages">
                             Messages
                         </Nav.Link>
-                        <Nav.Link href="#pricing">Also smth</Nav.Link>
+                        <Nav.Link href="/users">
+                            Users
+                        </Nav.Link>
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">About</Nav.Link>

@@ -10,6 +10,7 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = (dispatch) => {
+    return ({});
 }
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

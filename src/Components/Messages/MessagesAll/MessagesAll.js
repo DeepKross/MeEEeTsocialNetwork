@@ -17,7 +17,9 @@ function MessagesAll(props) {
 
     return (
         <div>
-            Messages
+            <div>
+                {myMessages}
+            </div>
             <div className={css.new_message}>
                 <textarea onChange={changeText} value={props.currentText}
                           className={css.new_text}></textarea>
@@ -25,9 +27,7 @@ function MessagesAll(props) {
                     Send
                 </button>
             </div>
-            <div>
-                {myMessages}
-            </div>
+
         </div>
     );
 }

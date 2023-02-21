@@ -18,20 +18,21 @@ let initialState = {
 let MessagePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case  SEND_MESSAGE:
-            let new_Message =
-                {
-                    id: state.dialogs.length,
-                    message: state.currentMessage
-                };
-            state.dialogs.push(new_Message);
-            state.currentMessage = '';
+            let newMessage = state.currentMessage;
+            return {
+                ...state,
+                currentMessage: '',
+                dialogs: [...state.dialogs, {id: state.dialogs.length, message: newMessage}]
+            };
             break;
         case CHANGE_MESSAGE:
-            state.currentMessage = action.text;
+            return {
+                ...state,
+                currentMessage: action.text
+            }
             break;
-        default: console.log("Unknown command")
+        default: return state;
     }
-    return state;
 }
 
 export let changeMessageActionCreator = (text) => {
