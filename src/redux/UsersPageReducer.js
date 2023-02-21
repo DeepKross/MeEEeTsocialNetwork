@@ -1,19 +1,17 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const CHANGE_PAGE = "CHANGEPAGE";
+const TOTAL_COUNT = "TOTALCOUNT";
 
 const url4Avatar = "https://graphicriver.img.customer.envatousercontent.com/files/383753376/Letter+A+Logo+-+Anglex_1.jpg?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=590&s=1322843b6a4dc44c34d61c195d61ee3e";
 
-
-/*
-users:[
-    {id: 1, ava: url4Avatar, followed: true, name: "Mike", status: "Hello world", location:{city:"Starkon", country:"Ukraine"}},
-    {id: 2, ava: url4Avatar, isFollowed: false, name: "Yurii",  status: "Glory to Ukraine", location:{city:"Kyiv", country:"Ukraine"}}
-]
-*/
-
 let initialState =  {
-    users:[]
+    users:[],
+    currentPage: 2,
+    pageCount: 0,
+    pageSize: 5,
+    totalUsers: 100
 };
 
 let UsersPageReducer = (state = initialState, action) => {
@@ -44,11 +42,22 @@ let UsersPageReducer = (state = initialState, action) => {
                 users: [...action.users]
             }
         }
+        case CHANGE_PAGE:{
+            return {
+                ...state,
+                currentPage: action.page
+            }
+        }
+        case TOTAL_COUNT:
+            return {
+                ...state,
+                totalUsers: action.n_users
+            }
         default: return state;
     }
 }
 
-export let followActionCreator = (userId) => {
+export let followAC = (userId) => {
     return (
         {
             type: FOLLOW,
@@ -57,7 +66,7 @@ export let followActionCreator = (userId) => {
     );
 };
 
-export let unFollowActionCreator = (userId) => {
+export let unFollowAC = (userId) => {
     return(
         {
             type: UNFOLLOW,
@@ -66,11 +75,28 @@ export let unFollowActionCreator = (userId) => {
     );
 };
 
-export let setUsersActionCreator = (users) => {
+export let setUsersAC = (users) => {
     return(
         {
             type: SET_USERS,
             users: users
+        }
+    );
+};
+
+export let changePageAC = (page) => {
+    return(
+        {
+            type: CHANGE_PAGE,
+            page
+        }
+    );
+};
+export let totalCountAC = (n_users) => {
+    return(
+        {
+            type: TOTAL_COUNT,
+            n_users
         }
     );
 };
