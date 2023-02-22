@@ -1,12 +1,10 @@
 function User(props) {
 
-    let followUser = () => {
+    let follow = () => {
         debugger;
         props.followUser(props.id);
     }
-
-
-    let unfollowUser = () => {
+    let unfollow = () => {
         debugger;
         props.unfollowUser(props.id);
     }
@@ -18,8 +16,8 @@ function User(props) {
             </div>
             <div>
                 {props.followedStatus
-                    ? <button onClick={unfollowUser}>Unfollow</button>
-                    : <button onClick={followUser}>Follow</button>}
+                    ? <button onClick={props.unfollowUser}>Unfollow</button>
+                    : <button onClick={props.followUser}>Follow</button>}
             </div>
         </span>
         <span>
