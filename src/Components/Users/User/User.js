@@ -16,8 +16,8 @@ function User(props) {
             </div>
             <div>
                 {props.followedStatus
-                    ? <button onClick={props.unfollowUser}>Unfollow</button>
-                    : <button onClick={props.followUser}>Follow</button>}
+                    ? <button onClick={unfollow}>Unfollow</button>
+                    : <button onClick={follow}>Follow</button>}
             </div>
         </span>
         <span>

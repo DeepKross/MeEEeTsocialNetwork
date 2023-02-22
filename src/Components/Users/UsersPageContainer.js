@@ -44,8 +44,6 @@ class UsersContainer extends React.Component {
             totalUsers={this.props.totalUsers}
             currentPage={this.props.currentPage}
             pageSize={this.props.pageSize}
-            followUser={this.props.followUser}
-            unfollowUser={this.props.unFollowUser}
             handleClick={this.HandleClick}
         />
     }
@@ -67,7 +65,7 @@ let mapDispatchToProps = (dispatch) => {
         followUser: (userId) => {
             dispatch(followAC(userId));
         },
-        unFollowUser: (userId) => {
+        unfollowUser: (userId) => {
             dispatch(unFollowAC(userId));
         },
         setUsers: (users) => {
