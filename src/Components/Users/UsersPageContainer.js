@@ -3,7 +3,7 @@ import {
     changePageAC,
     followAC,
     setUsersAC, totalCountAC,
-    unFollowAC
+    unFollowAC, fetchAC
 } from "../../redux/UsersPageReducer";
 import React from "react";
 import axios from "axios";
@@ -14,18 +14,19 @@ const url4Avatar = "https://graphicriver.img.customer.envatousercontent.com/file
 
 class UsersContainer extends React.Component {
     componentDidMount() {
+        this.props.fetch(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            debugger;
+            this.props.fetch(false);
             this.props.setUsers(response.data.items);
             //this.props.totalCount(response.data.totalCount)
         })
     }
 
     HandleClick = (currPage) => {
-        debugger;
+        this.props.fetch(true);
         this.props.changePage(currPage);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`).then(response => {
-            debugger;
+            this.props.fetch(false);
             this.props.setUsers(response.data.items);
             //this.props.totalCount(response.data.totalCount)
         })
@@ -45,6 +46,7 @@ class UsersContainer extends React.Component {
             currentPage={this.props.currentPage}
             pageSize={this.props.pageSize}
             handleClick={this.HandleClick}
+            isFetching={this.props.isFetching}
         />
     }
 }
@@ -55,7 +57,8 @@ let mapStateToProps = (state) => {
             users: state.usersPage.users,
             currentPage: state.usersPage.currentPage,
             totalUsers: state.usersPage.totalUsers,
-            pageSize: state.usersPage.pageSize
+            pageSize: state.usersPage.pageSize,
+            isFetching: state.usersPage.isFetching
         }
     );
 }
@@ -76,6 +79,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         totalCount: (n_users) => {
             dispatch(totalCountAC(n_users));
+        },
+        fetch: (isFetching) => {
+            dispatch(fetchAC(isFetching));
         }
     };
 }
