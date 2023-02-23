@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
+const SET_PROFILE = "SETPROFILE";
 
 let initialState =  {
     posts: [
@@ -7,7 +8,8 @@ let initialState =  {
         {id: 2, text: "Heu, How are you guys!"},
         {id: 3, text: "today I was on the trip to London and had a great time"}
     ],
-    currentText: ""
+    currentText: "",
+    profile: null
 };
 
 let ProfilePageReducer = (state = initialState, action) => {
@@ -19,13 +21,17 @@ let ProfilePageReducer = (state = initialState, action) => {
                 currentText: '',
                 posts: [...state.posts, {id: state.posts.length, text: newPost}]
             };
-            break;
         case CHANGE_TEXT:
             return {
                 ...state,
                 currentText: action.text
             }
-            break;
+        case SET_PROFILE:
+            debugger;
+            return {
+                ...state,
+                profile: action.profile
+            }
         default: return state;
     }
 }
@@ -43,6 +49,15 @@ export let changeTextActionCreator = (text) => {
         {
             type: CHANGE_TEXT,
             text: text
+        }
+    );
+};
+
+export let setProfileAC = (profile) => {
+    return(
+        {
+            type: SET_PROFILE,
+            profile
         }
     );
 };

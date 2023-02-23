@@ -1,10 +1,10 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./Components/NavBar";
-import MyProfile from './Components/Profile/MyProfile'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import MessagesPage from "./Components/Messages/MessagesPage";
 import UsersPageContainer from "./Components/Users/UsersPageContainer";
+import MyProfileContainer from "./Components/Profile/MyProfileContainer";
 
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
                 <NavBar/>
                 <div className="mainContent">
                     <Routes>
-                        <Route path="/"
-                               element={<MyProfile/>}></Route>
-                        <Route path="/profile"
-                               element={<MyProfile/>}></Route>
+                        <Route path="profile"
+                               element={<MyProfileContainer/>}>
+                            <Route path={":profileId"} element={<MyProfileContainer/>}/>
+                        </Route>
                         <Route path="/messages/*"
                                element={<MessagesPage/>}></Route>
                         <Route path="/users/*"

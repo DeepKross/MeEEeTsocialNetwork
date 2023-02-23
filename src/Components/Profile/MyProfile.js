@@ -3,11 +3,11 @@ import MyProfileLeft from "./Left/MyProfileLeft";
 import MyProfileRight from "./Right/MyProfileRight";
 
 function MyProfile(props) {
-    //console.log(props.store.getState().)
+    debugger;
     return (
         <div className={css.profile}>
-            <MyProfileLeft/>
-            <MyProfileRight />
+            <MyProfileLeft profile={props.profile}/>
+            <MyProfileRight/>
         </div>
     );
 }

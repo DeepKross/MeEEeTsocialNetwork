@@ -1,16 +1,18 @@
 import css from "../MyProfile.module.css"
+import Preloader from "../../common/PreLoader/Preloader";
 
-function Left() {
+function Left(props) {
+    debugger;
     return (
         <div className={css.left}>
-            <img className={css.logo}
-                 src="https://images.freeimages.com/365/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg"/>
-            <div className={css.desc}> My name is Mike Tanchuk. I am a student of KNU of faculty Cyber Science.
-                Currently
-                looking
-                for a job as a Software Developer and that is my PetProject of Social Networking Site that I called
-                MeEEeT.
-            </div>
+            {!props.profile ? <Preloader/> :
+                <div>
+                    {!props.profile.photos.large ? <Preloader/> : <img className={css.logo}
+                                                                       src={props.profile.photos.large}/>}
+                    {!props.profile.aboutMe ? <Preloader/> : <div className={css.desc}>{props.profile.aboutMe}</div>}
+
+                </div>
+            }
         </div>
     );
 }

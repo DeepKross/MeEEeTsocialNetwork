@@ -1,3 +1,5 @@
+import {NavLink} from "react-router-dom";
+
 function User(props) {
 
     let follow = () => {
@@ -12,7 +14,9 @@ function User(props) {
     return <div>
         <span>
             <div>
+                <NavLink to={"/profile/" + props.id}>
                 <img width="100px" height="100px" src={props.ava} alt="Avatar"/>
+                    </NavLink>
             </div>
             <div>
                 {props.followedStatus
