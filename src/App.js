@@ -5,13 +5,14 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import MessagesPage from "./Components/Messages/MessagesPage";
 import UsersPageContainer from "./Components/Users/UsersPageContainer";
 import MyProfileContainer from "./Components/Profile/MyProfileContainer";
+import NavBarContainer from "./Components/NavBarContainer";
 
 
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <NavBar/>
+                <NavBarContainer/>
                 <div className="mainContent">
                     <Routes>
                         <Route path="profile"

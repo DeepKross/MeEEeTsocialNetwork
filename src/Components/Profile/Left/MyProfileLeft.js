@@ -2,7 +2,6 @@ import css from "../MyProfile.module.css"
 import Preloader from "../../common/PreLoader/Preloader";
 
 function Left(props) {
-    debugger;
     return (
         <div className={css.left}>
             {!props.profile ? <Preloader/> :

@@ -2,9 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
-function CollapsibleExample() {
+function CollapsibleExample(props) {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -34,8 +34,10 @@ function CollapsibleExample() {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">About</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Share
+                        <Nav.Link>
+                            <NavLink to={"/login"}>
+                                {props.isAuth ? props.login : <div>LogIn</div>}
+                            </NavLink>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

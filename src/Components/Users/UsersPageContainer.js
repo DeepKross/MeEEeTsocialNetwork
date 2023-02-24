@@ -9,13 +9,14 @@ import React from "react";
 import axios from "axios";
 import UsersPage from "./UsersPage";
 import User from "./User/User";
+
 const url4Avatar = "https://graphicriver.img.customer.envatousercontent.com/files/383753376/Letter+A+Logo+-+Anglex_1.jpg?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=590&s=1322843b6a4dc44c34d61c195d61ee3e";
 
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.fetch(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.fetch(false);
             this.props.setUsers(response.data.items);
             //this.props.totalCount(response.data.totalCount)
@@ -25,7 +26,7 @@ class UsersContainer extends React.Component {
     HandleClick = (currPage) => {
         this.props.fetch(true);
         this.props.changePage(currPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.fetch(false);
             this.props.setUsers(response.data.items);
             //this.props.totalCount(response.data.totalCount)
@@ -34,11 +35,11 @@ class UsersContainer extends React.Component {
 
 
     render() {
-        let users = this.props.users.map(e => <User key={e.id} id={e.id} name={e.name} status={e.status}
-                                   ava={e.photos.small === null ? url4Avatar : e.photos.small}
-                                   followedStatus={e.followed}
-                                   followUser={this.props.followUser}
-                                   unfollowUser={this.props.unfollowUser}></User>);
+        let users = this.props.users.map(e => <User id={e.id} name={e.name} status={e.status}
+                                                    ava={e.photos.small === null ? url4Avatar : e.photos.small}
+                                                    followedStatus={e.followed}
+                                                    followUser={this.props.followUser}
+                                                    unfollowUser={this.props.unfollowUser}></User>);
 
         return <UsersPage
             users={users}

@@ -3,7 +3,6 @@ import MyProfileLeft from "./Left/MyProfileLeft";
 import MyProfileRight from "./Right/MyProfileRight";
 
 function MyProfile(props) {
-    debugger;
     return (
         <div className={css.profile}>
             <MyProfileLeft profile={props.profile}/>

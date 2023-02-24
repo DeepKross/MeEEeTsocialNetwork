@@ -27,7 +27,6 @@ let ProfilePageReducer = (state = initialState, action) => {
                 currentText: action.text
             }
         case SET_PROFILE:
-            debugger;
             return {
                 ...state,
                 profile: action.profile
