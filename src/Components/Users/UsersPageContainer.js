@@ -6,9 +6,9 @@ import {
     unFollowAC, fetchAC
 } from "../../redux/UsersPageReducer";
 import React from "react";
-import axios from "axios";
 import UsersPage from "./UsersPage";
 import User from "./User/User";
+import {usersAPI} from "../../api/api";
 
 const url4Avatar = "https://graphicriver.img.customer.envatousercontent.com/files/383753376/Letter+A+Logo+-+Anglex_1.jpg?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=590&s=1322843b6a4dc44c34d61c195d61ee3e";
 
@@ -16,20 +16,22 @@ const url4Avatar = "https://graphicriver.img.customer.envatousercontent.com/file
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.fetch(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(response => {
             this.props.fetch(false);
-            this.props.setUsers(response.data.items);
-            //this.props.totalCount(response.data.totalCount)
+            this.props.setUsers(response.items);
+            //this.props.totalCount(response.totalCount)
         })
     }
 
     HandleClick = (currPage) => {
         this.props.fetch(true);
         this.props.changePage(currPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        usersAPI.getUsers(currPage, this.props.pageSize)
+            .then(response => {
             this.props.fetch(false);
-            this.props.setUsers(response.data.items);
-            //this.props.totalCount(response.data.totalCount)
+            this.props.setUsers(response.items);
+            //this.props.totalCount(response.totalCount)
         })
     }
 

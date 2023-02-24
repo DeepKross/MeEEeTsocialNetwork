@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {connect} from "react-redux";
 import {
     useLocation,
@@ -8,6 +7,7 @@ import {
 } from "react-router-dom";
 import NavBar from "./NavBar";
 import {loginUserAC} from "../redux/AuthReducer";
+import {navbarAPI} from "../api/api";
 
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -30,10 +30,10 @@ function withRouter(Component) {
 class NavBarContainer extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
+            navbarAPI.loginUser()
             .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.loginUser(response.data.data);
+                if (response.resultCode === 0) {
+                    this.props.loginUser(response.data);
                 }
             })
     }

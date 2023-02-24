@@ -1,34 +1,23 @@
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../../api/api";
 
 function User(props) {
     let follow = () => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,{} ,{
-            withCredentials: true,
-            headers: {
-                "API-KEY": "359caf97-209f-4b0c-abb2-8bec018c8c0b"
-            }
-        }).then(response =>
-        {
-            if (response.data.resultCode == 0) {
-                props.followUser(props.id);
-            }
-        })
+        usersAPI.followUser(props.id)
+            .then(response => {
+                if (response.resultCode == 0) {
+                    props.followUser(props.id);
+                }
+            });
 
     }
     let unfollow = () => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "359caf97-209f-4b0c-abb2-8bec018c8c0b"
+        usersAPI.unfollowUser(props.id)
+            .then(response => {
+                if (response.resultCode == 0) {
+                    props.unfollowUser(props.id);
                 }
-            }
-        ).then(response => {
-            if (response.data.resultCode == 0) {
-                props.unfollowUser(props.id);
-            }
-
-        })
+            });
     }
 
     return <div>

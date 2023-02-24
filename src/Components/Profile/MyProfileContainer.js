@@ -1,6 +1,5 @@
 import React from "react";
 import MyProfile from "./MyProfile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {setProfileAC} from "../../redux/ProfilePageReducer";
 import {
@@ -8,8 +7,7 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
-
-
+import {profileAPI} from "../../api/api";
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -31,11 +29,11 @@ class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.profileId;
-        //console.log(userId);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
+        profileAPI.showProfile(userId)
+        .then(response => {
             this.props.setProfile(response.data);
-            //this.props.totalCount(response.data.totalCount)
-        })
+            //this.props.totalCount(response.totalCount)
+        });
     }
 
     render() {
