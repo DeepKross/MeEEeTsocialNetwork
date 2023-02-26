@@ -1,30 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
 import NavBar from "./NavBar";
 import {loginUserTC} from "../redux/AuthReducer";
-
-
-// wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{location, navigate, params}}
-            />
-        );
-    }
-
-    return ComponentWithRouterProp;
-}
+import {compose} from "redux";
+import withRouter from "../hoc/withRouter";
 
 class NavBarContainer extends React.Component {
 
@@ -50,8 +29,9 @@ let mapStateToProps = (state) => {
     );
 }
 
-const NavBarCont = connect(mapStateToProps, {
-    loginUser: loginUserTC
-})(withRouter(NavBarContainer));
-
-export default NavBarCont;
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {
+        loginUser: loginUserTC
+    })
+)(NavBarContainer);

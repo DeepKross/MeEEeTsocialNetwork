@@ -5,6 +5,7 @@ import MessagesPage from "./Components/Messages/MessagesPage";
 import UsersPageContainer from "./Components/Users/UsersPageContainer";
 import MyProfileContainer from "./Components/Profile/MyProfileContainer";
 import NavBarContainer from "./Components/NavBarContainer";
+import LoginContainer from "./Components/Login/LoginContainer";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                                element={<MessagesPage/>}></Route>
                         <Route path="/users/*"
                                element={<UsersPageContainer/>}></Route>
+                        <Route path="/login" element={<LoginContainer/>}></Route>
                     </Routes>
                 </div>
             </div>
