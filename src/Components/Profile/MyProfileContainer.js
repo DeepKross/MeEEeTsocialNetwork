@@ -1,7 +1,7 @@
 import React from "react";
 import MyProfile from "./MyProfile";
 import {connect} from "react-redux";
-import {setProfileAC} from "../../redux/ProfilePageReducer";
+import {setProfileAC, setProfileTC} from "../../redux/ProfilePageReducer";
 import {
     useLocation,
     useNavigate,
@@ -28,12 +28,7 @@ function withRouter(Component) {
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        let userId = this.props.router.params.profileId;
-        profileAPI.showProfile(userId)
-        .then(response => {
-            this.props.setProfile(response.data);
-            //this.props.totalCount(response.totalCount)
-        });
+        this.props.setProfile(this.props.router.params.profileId);
     }
 
     render() {
@@ -50,7 +45,7 @@ let mapStateToProps = (state) => {
 }
 
 const MyProfilePageContainer = connect(mapStateToProps, {
-    setProfile: setProfileAC
+    setProfile: setProfileTC
 })(withRouter(ProfileContainer));
 
 export default MyProfilePageContainer;

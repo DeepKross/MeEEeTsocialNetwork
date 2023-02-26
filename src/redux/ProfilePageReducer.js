@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
 const SET_PROFILE = "SETPROFILE";
@@ -59,6 +61,15 @@ export let setProfileAC = (profile) => {
             profile
         }
     );
+};
+export let setProfileTC = (userId) => {
+    return (dispatch) => {
+        profileAPI.showProfile(userId)
+            .then(response => {
+                dispatch(setProfileAC(response.data));
+                //dispatch(totalCountAC(response.totalCount));
+            });
+    };
 };
 
 export default ProfilePageReducer;
