@@ -1,16 +1,20 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const CHANGE_PAGE = "CHANGEPAGE";
 const TOTAL_COUNT = "TOTALCOUNT";
 const FETCH = "FETCH";
+const FOLLOWING_IN_PROGRESS ="FOLLOWINGINPROGRESS";
 
 let initialState =  {
     users:[],
     currentPage: 2,
     pageSize: 5,
     totalUsers: 100,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: [],
 };
 
 let UsersPageReducer = (state = initialState, action) => {
@@ -56,6 +60,12 @@ let UsersPageReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         default: return state;
     }
@@ -111,5 +121,50 @@ export let fetchAC = (isFetching) => {
             isFetching
         }
     );
+};
+export let followingProgressAC = (isFetching,userId) => {
+    return(
+        {
+            type: FOLLOWING_IN_PROGRESS,
+            isFetching,
+            userId
+        }
+    );
+};
+export let getUsersTC = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(fetchAC(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(response => {
+                dispatch(fetchAC(false));
+                dispatch(setUsersAC(response.items));
+                //dispatch(totalCountAC(response.totalCount));
+            })
+    };
+};
+
+export let followTC = (userId) => {
+    return (dispatch) => {
+        dispatch(followingProgressAC(true, userId));
+        usersAPI.followUser(userId)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(followAC(userId));
+                }
+                dispatch(followingProgressAC(false, userId));
+            });
+    };
+};
+export let unfollowTC = (userId) => {
+    return (dispatch) => {
+        dispatch(followingProgressAC(true, userId));
+        usersAPI.unfollowUser(userId)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(unFollowAC(userId));
+                }
+                dispatch(followingProgressAC(false, userId));
+            });
+    };
 };
 export default UsersPageReducer;

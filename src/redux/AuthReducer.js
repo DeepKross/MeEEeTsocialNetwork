@@ -1,6 +1,8 @@
+import {navbarAPI} from "../api/api";
+
 const LOGIN = "LOGIN";
 
-let initialState =  {
+let initialState = {
     id: null,
     email: null,
     login: null,
@@ -15,7 +17,8 @@ let ProfilePageReducer = (state = initialState, action) => {
                 ...action.data,
                 isAuth: true
             };
-        default: return state;
+        default:
+            return state;
     }
 }
 
@@ -26,6 +29,16 @@ export let loginUserAC = (data) => {
             data
         }
     );
+};
+export const loginUserTC = () => {
+    return (dispatch) => {
+        navbarAPI.loginUser()
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(loginUserAC(response.data));
+                }
+            })
+    };
 };
 
 export default ProfilePageReducer;

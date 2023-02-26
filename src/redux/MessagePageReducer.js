@@ -24,13 +24,11 @@ let MessagePageReducer = (state = initialState, action) => {
                 currentMessage: '',
                 dialogs: [...state.dialogs, {id: state.dialogs.length, message: newMessage}]
             };
-            break;
         case CHANGE_MESSAGE:
             return {
                 ...state,
                 currentMessage: action.text
             }
-            break;
         default: return state;
     }
 }

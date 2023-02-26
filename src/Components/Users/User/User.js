@@ -1,24 +1,6 @@
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
 
 function User(props) {
-    let follow = () => {
-        usersAPI.followUser(props.id)
-            .then(response => {
-                if (response.resultCode == 0) {
-                    props.followUser(props.id);
-                }
-            });
-
-    }
-    let unfollow = () => {
-        usersAPI.unfollowUser(props.id)
-            .then(response => {
-                if (response.resultCode == 0) {
-                    props.unfollowUser(props.id);
-                }
-            });
-    }
 
     return <div>
         <span>
@@ -29,8 +11,10 @@ function User(props) {
             </div>
             <div>
                 {props.followedStatus
-                    ? <button onClick={unfollow}>Unfollow</button>
-                    : <button onClick={follow}>Follow</button>}
+                    ? <button disabled={props.usersFollowingInProgress.some(id => id === props.id)}
+                              onClick={() => {props.unfollowUser(props.id)}}>Unfollow</button>
+                    : <button disabled={props.usersFollowingInProgress.some(id => id === props.id)}
+                              onClick={() => {props.followUser(props.id)}}>Follow</button>}
             </div>
         </span>
         <span>
