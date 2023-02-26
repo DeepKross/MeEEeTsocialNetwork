@@ -1,6 +1,7 @@
 import {changeMessageActionCreator, sendMessageActionCreator} from "../../../redux/MessagePageReducer";
 import MessagesAll from "./MessagesAll";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state) => {
     return (
@@ -24,6 +25,8 @@ let mapDispatchToProps = (dispatch) => {
     );
 }
 
-const MessagesAllContainer = connect(mapStateToProps, mapDispatchToProps)(MessagesAll)
+
+
+const MessagesAllContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(MessagesAll))
 
 export default MessagesAllContainer;
