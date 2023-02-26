@@ -6,7 +6,7 @@ function Left(props) {
         <div className={css.left}>
             {!props.profile ? <Preloader/> :
                 <div>
-                    {!props.profile.photos.large ? <Preloader/> : <img className={css.logo}
+                    {!props.profile.photos.large ? <Preloader/> : <img alt="logo" className={css.logo}
                                                                        src={props.profile.photos.large}/>}
                     {!props.profile.aboutMe ? <Preloader/> : <div className={css.desc}>{props.profile.aboutMe}</div>}
 

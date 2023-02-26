@@ -6,8 +6,7 @@ import {
     useParams,
 } from "react-router-dom";
 import NavBar from "./NavBar";
-import {loginUserAC} from "../redux/AuthReducer";
-import {navbarAPI} from "../api/api";
+import {loginUserTC} from "../redux/AuthReducer";
 
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -30,12 +29,7 @@ function withRouter(Component) {
 class NavBarContainer extends React.Component {
 
     componentDidMount() {
-            navbarAPI.loginUser()
-            .then(response => {
-                if (response.resultCode === 0) {
-                    this.props.loginUser(response.data);
-                }
-            })
+            this.props.loginUser();
     }
 
     render() {
@@ -57,7 +51,7 @@ let mapStateToProps = (state) => {
 }
 
 const NavBarCont = connect(mapStateToProps, {
-    loginUser: loginUserAC
+    loginUser: loginUserTC
 })(withRouter(NavBarContainer));
 
 export default NavBarCont;
