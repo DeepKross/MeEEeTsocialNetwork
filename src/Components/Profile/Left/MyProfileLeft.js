@@ -1,5 +1,6 @@
 import css from "../MyProfile.module.css"
 import Preloader from "../../common/PreLoader/Preloader";
+import MyProfileLeftStatus from "./MyProfileLeftStatus";
 
 function Left(props) {
     return (
@@ -8,7 +9,7 @@ function Left(props) {
                 <div>
                     {!props.profile.photos.large ? <Preloader/> : <img alt="logo" className={css.logo}
                                                                        src={props.profile.photos.large}/>}
-                    {!props.profile.aboutMe ? <Preloader/> : <div className={css.desc}>{props.profile.aboutMe}</div>}
+                    <MyProfileLeftStatus status={props.profile.aboutMe}/>
 
                 </div>
             }
